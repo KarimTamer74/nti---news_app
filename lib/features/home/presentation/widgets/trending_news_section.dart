@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/core/utils/app_colors.dart';
+import 'package:news_app/features/home/data/models/article_model.dart';
+import 'package:news_app/features/home/presentation/cubit/home_cubit.dart';
+import 'package:news_app/features/home/presentation/cubit/home_states.dart';
+import 'package:news_app/features/home/presentation/widgets/trending_news_item_widget.dart';
 
 class TrendingNewsSection extends StatelessWidget {
   const TrendingNewsSection({super.key});
@@ -25,60 +30,48 @@ class TrendingNewsSection extends StatelessWidget {
               ),
             ],
           ),
-          Expanded(
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: 3,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    spacing: 15,
-                    children: [
-                      Text(
-                        '${index + 1}',
-                        style: TextStyle(color: AppColors.white, fontSize: 22),
-                      ),
-                      ClipRRect(
-                        borderRadius: BorderRadiusGeometry.circular(15),
-                        child: Image.asset(
-                          'assets/images/news.jpg',
-                          width: 150,
+          BlocBuilder<HomeCubit, HomeState>(
+            builder: (context, state) {
+              if (state is GetTrendingNewsLoading) {
+                return Center(child: CircularProgressIndicator());
+              } else if (state is GetTrendingNewsFailure) {
+                return getErrorWidget();
+              } else if (state is GetTrendingNewsLoaded) {
+                final List<ArticleModel> articles = state.articles;
+                return Expanded(
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 3,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: TrendingNewsItemWidget(
+                          article: articles[index],
+                          index: index,
                         ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Liberals are all mean girls now",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              color: AppColors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          Text(
-                            "Washington Examiner",
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              color: AppColors.grey,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                      );
+                    },
                   ),
                 );
-              },
-            ),
+              } else {
+                return SizedBox.shrink();
+              }
+            },
           ),
         ],
+      ),
+    );
+  }
+
+  Widget getErrorWidget() {
+    return Center(
+      child: Text(
+        "Error",
+        style: TextStyle(
+          fontSize: 32,
+          fontWeight: FontWeight.bold,
+          color: AppColors.red,
+        ),
       ),
     );
   }
