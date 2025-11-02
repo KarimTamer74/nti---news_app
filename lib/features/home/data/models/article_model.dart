@@ -14,14 +14,14 @@ class ArticleModel {
   });
   factory ArticleModel.fromJson(Map<String, dynamic> json) {
     return ArticleModel(
-      title: json['title'],
-      author: json['author'],
-      desc: json['description'],
-      url: json['url'],
-      image: json['urlToImage'],
-      publishAt: json['publishedAt'],
-      content: json['content'],
-      source: json['source'],
+      title: json['title'] ?? '',
+      author: json['author'] ?? '',
+      desc: json['description'] ?? '',
+      url: json['url'] ?? "",
+      image: json['urlToImage'] ?? '',
+      publishAt: json['publishedAt'] ?? "",
+      content: json['content'] ?? '',
+      source: Source.fromJson(json['source']),
     );
   }
 }
@@ -31,4 +31,7 @@ class Source {
   final String name;
 
   Source({required this.id, required this.name});
+  factory Source.fromJson(Map<String, dynamic> json) {
+    return Source(id: json['id'], name: json['name']);
+  }
 }
