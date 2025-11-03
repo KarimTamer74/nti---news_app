@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/core/utils/app_colors.dart';
+import 'package:news_app/features/home/presentation/cubit/home_cubit.dart';
 
 class HomeScreenTopSection extends StatefulWidget {
   const HomeScreenTopSection({super.key});
@@ -30,14 +32,25 @@ class _HomeScreenTopSectionState extends State<HomeScreenTopSection> {
         children: [
           //* Search Field
           TextField(
+            onChanged: (value) {
+              BlocProvider.of<HomeCubit>(context).searchForNews(value);
+            },
+            style: TextStyle(color: AppColors.white),
             controller: _controller,
             decoration: InputDecoration(
               prefixIcon: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  BlocProvider.of<HomeCubit>(
+                    context,
+                  ).searchForNews(_controller.text);
+                },
                 icon: Icon(Icons.search, color: AppColors.white),
               ),
               suffixIcon: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  _controller.clear();
+                  BlocProvider.of<HomeCubit>(context).searchForNews('');
+                },
                 icon: Icon(Icons.close, color: AppColors.white),
               ),
               hintText: 'Search for articles...',
