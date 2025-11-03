@@ -13,3 +13,13 @@ class GetTrendingNewsLoaded extends HomeState {
 }
 
 class GetTrendingNewsFailure extends HomeState {}
+
+class GetAllNewsLoading extends HomeState {}
+
+class GetAllNewsLoaded extends HomeState {
+  final List<ArticleModel> articles;
+
+  GetAllNewsLoaded({required this.articles});
+}
+
+class GetAllNewsFailure extends HomeState {}
