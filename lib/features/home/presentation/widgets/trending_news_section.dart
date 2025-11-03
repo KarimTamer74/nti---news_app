@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/core/shared_widgets/error_widget.dart';
+import 'package:news_app/core/shared_widgets/loading_indicator_widget.dart';
 import 'package:news_app/core/utils/app_colors.dart';
 import 'package:news_app/features/home/data/models/article_model.dart';
 import 'package:news_app/features/home/presentation/cubit/home_cubit.dart';
@@ -31,17 +33,22 @@ class TrendingNewsSection extends StatelessWidget {
             ],
           ),
           BlocBuilder<HomeCubit, HomeState>(
+            buildWhen: (previous, current) =>
+                current is GetTrendingNewsFailure ||
+                current is GetTrendingNewsLoading ||
+                current is GetTrendingNewsLoaded,
+
             builder: (context, state) {
               if (state is GetTrendingNewsLoading) {
-                return Center(child: CircularProgressIndicator());
+                return LoadingIndicatorWidget();
               } else if (state is GetTrendingNewsFailure) {
-                return getErrorWidget();
+                return CustomErrorWidget();
               } else if (state is GetTrendingNewsLoaded) {
                 final List<ArticleModel> articles = state.articles;
                 return Expanded(
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: 3,
+                    itemCount: articles.length,
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: const EdgeInsets.only(right: 10),
@@ -59,19 +66,6 @@ class TrendingNewsSection extends StatelessWidget {
             },
           ),
         ],
-      ),
-    );
-  }
-
-  Widget getErrorWidget() {
-    return Center(
-      child: Text(
-        "Error",
-        style: TextStyle(
-          fontSize: 32,
-          fontWeight: FontWeight.bold,
-          color: AppColors.red,
-        ),
       ),
     );
   }
