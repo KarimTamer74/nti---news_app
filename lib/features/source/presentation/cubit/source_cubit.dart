@@ -16,6 +16,7 @@ class SourceCubit extends Cubit<SourceState> {
         .then(
           (value) {
             log("sources: $value", name: 'Get Trending News');
+            sources = value;
             emit(GetSourcesLoaded(sources: value));
           },
           onError: (error) {
@@ -23,5 +24,21 @@ class SourceCubit extends Cubit<SourceState> {
             emit(GetSourcesFailure());
           },
         );
+  }
+
+  List<SourceModel> searchForNewsSource(String query) {
+    if (query.isEmpty) {
+      emit(GetSourcesLoaded(sources: sources));
+      return sources;
+    }
+
+    final filteredList = sources
+        .where(
+          (source) => source.name.toLowerCase().contains(query.toLowerCase()),
+        )
+        .toList();
+
+    emit(GetSourcesLoaded(sources: filteredList));
+    return filteredList;
   }
 }
