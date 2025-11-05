@@ -13,10 +13,10 @@ class TrendingNewsItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 300,
+      width: 330,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 15,
+        spacing: 5,
         children: [
           Text(
             '${index + 1}',
@@ -46,7 +46,7 @@ class TrendingNewsItemWidget extends StatelessWidget {
                 ),
                 Text(
                   article.author,
-                  maxLines: 2,
+                  maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: AppColors.grey,
