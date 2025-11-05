@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/shared_widgets/my_app_bar.dart';
 import 'package:news_app/core/utils/app_colors.dart';
 import 'package:news_app/features/home/presentation/widgets/all_news_section.dart';
 import 'package:news_app/features/home/presentation/widgets/home_screen_top_section.dart';
@@ -11,23 +12,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
-      appBar: AppBar(
-        backgroundColor: AppColors.black,
-        title: Text(
-          "InsightFeed",
-          style: TextStyle(
-            fontSize: 22,
-            color: AppColors.white,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.sunny, color: AppColors.white, size: 28),
-          ),
-        ],
-      ),
+      appBar: MyAppBar(onActionPressed: () {}),
       body: Column(
         children: [
           //* HomeScreenTopSection
