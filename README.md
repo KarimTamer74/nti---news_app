@@ -1,154 +1,170 @@
-<!--
-	News App - README
-	This README follows the same structure and tone used by the E-Commerce
-	template you referenced. It has: badges, table of contents, screenshots
-	table, installation instructions, features, project structure, and notes.
--->
+## 🗞 News App
 
-# News App  
-
-![Flutter](https://img.shields.io/badge/Flutter-3.x-blue?logo=flutter) ![Dart](https://img.shields.io/badge/Dart-2.x-blue?logo=dart)
-
-A clean, responsive Flutter News application that shows breaking headlines, trending stories, and category-based articles. Built with Cubit (BLoC), MVVM architecture, and supports light/dark themes and English/Arabic localization.
+![Flutter](https://img.shields.io/badge/Flutter-02569B?logo=flutter&logoColor=white) ![Dart](https://img.shields.io/badge/Dart-0175C2?logo=dart&logoColor=white)
 
 ---
 
 ## Table of Contents
 
-- [App Overview](#app-overview)
-- [Main Features](#main-features)
-- [Screens](#screens)
-- [App Preview](#app-preview)
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Installation](#installation)
-- [API Source](#api-source)
-- [Notes & Tips](#notes--tips)
-- [License](#license)
+* [App Overview](#app-overview)
+* [Main Features](#main-features)
+* [App Preview](#app-preview)
+* [📸 Extra Screens](#-extra-screens)
+* [🛠 Tech Stack](#-tech-stack)
+* [Project Structure (key files)](#project-structure-key-files)
+* [📦 Installation](#-installation)
+* [Future Enhancements](#future-enhancements)
+* [Notes](#notes)
 
 ---
 
 ## App Overview
 
-This News App presents the latest headlines and curated content in a compact, modern UI. It fetches data from a remote API (for example, NewsAPI.org or a custom backend). The app uses Cubit for state management and follows an MVVM-inspired folder structure for clarity and testability. It also provides:
+> **News App** is a modern Flutter application that delivers the latest headlines and top stories from around the world.  
+> The app focuses on simplicity, speed, and clean UI — featuring categorized news, trending topics, and news sources, all powered by the **NewsAPI**.
 
-- Light & Dark mode
-- Localization (English / Arabic)
-- Responsive UI for phones, tablets and web
-- Bookmarking/favorites and search
+The app is built with **MVVM architecture**, **BLoC (Cubit)** for state management, and integrates real-world API data using **Dio**.
+
+---
 
 ## Main Features
 
-- Home screen with categories and top headlines
-- Trending news carousel/list
-- News details screen with share and open-in-browser actions
-- Search screen with suggestions
-- Favorites/bookmarked articles list
-- Profile / Settings screen with theme & language toggles
-- Offline-friendly caching for launched articles (where available)
+### 🏠 Home Screen
 
-## Screens
+* Displays **Trending News**, **Search**, **All News**, and **Categories**.
+* Each category shows related news fetched via the API.
+* Detailed view for each news article.
 
-- Home — includes Trending, Search, All News, and Categories
-- Sources — includes Search, Filter (by category), and All Sources
-- Article Details
-- Favorites / Bookmarks
-- Profile / Settings
+---
+
+### 📰 Sources Screen
+
+* View all available news sources.
+* Filter and search by source or category.
+* Browse articles published by a selected source.
+
+---
 
 ## App Preview
 
-| Example Screenshot | Example Screenshot |
-|---:|:---|
-| ![news_sample](assets/images/news.jpg) | ![news_sample_2](assets/images/news.jpg) |
+|               Home                |             Categories              |             Home Search              |
+| :-----------------------------------: | :-------------------------------------: | :----------------------------------: |
+| ![Home Dark](app_shots/home.png) | ![Categories Dark](app_shots/home_with_cat.png) | ![Home Seacrh](app_shots/home_search.png) |
 
-> Only one screenshot is currently present in the project at `assets/images/news.jpg`. If you want multiple preview images, add them to `assets/images/` (or create an `assets/app_shots/` folder) and update these paths accordingly.
+|             Sources              |             Sources Categories             |             Sources Search             |
+| :-------------------------------------------: | :---------------------------------: | :-----------------------------------: |
+| ![Sources](app_shots/sources.png) | ![ Sources Categories](app_shots/sources_cat.png) | ![Sources Search](app_shots/sources_search.png) |
 
-## Tech Stack
+---
 
-- Flutter
-- Dart
-- flutter_bloc / cubit for state management
-- HTTP (or Dio) for networking
-- Intl for localization
+## 📸 Extra Screens
 
-## Project Structure
+|             No Source             |             No News             |             Category News Dark             |
+| :-----------------------------------------: | :---------------------------------: | 
+| ![No Source](app_shots/no_sources.png) | ![No News](app_shots/no_news.png) | 
 
-Top-level folders you care about:
+---
 
-- `lib/` - application source
-	- `core/` - shared widgets, utils, and theming
-		- `shared_widgets/` - reusable widgets (e.g. `no_items_found.dart`)
-	- `features/`
-		- `home/` - home feature (data, domain, presentation)
-			- `data/` - models, api services, repositories
-				- `api_service/` - API client and services (see below)
-			- `presentation/` - views, widgets, cubits
-		- `source/` - news sources feature
-		- `...` - other feature modules (search, bookmarks, profile)
+## 🛠 Tech Stack
 
-Key files of interest:
+* ![Flutter](https://img.shields.io/badge/Flutter-3.13+-blue?logo=flutter)
+* ![Dart](https://img.shields.io/badge/Dart-3.1+-blue?logo=dart)
+* **Architecture:** MVVM Architecture  
+* **State Management:** BLoC / Cubit  
+* **Networking:** Dio (^5.9.0)  
+* **UI Components:** Convex Bottom Bar (^3.2.0)  
+* **API Source:** [NewsAPI.org](https://newsapi.org/)  
+* **Storage:** Shared Preferences (for caching data if needed)  
 
-- `lib/features/home/data/api_service/api_services.dart` - API client and endpoint wrappers
-- `lib/main.dart` - app entry, theme & localization setup
-- `lib/main_view.dart` - main scaffold & navigation
+---
 
-## Installation
+## Project Structure (key files)
 
-1. Ensure Flutter is installed. See the official docs if needed: https://flutter.dev
+The app follows the **Clean MVVM Architecture** pattern for scalability and separation of concerns.
 
-2. From project root, get packages:
+```
+
+├── core/
+│ ├── shared_widgets/
+│ │ ├── category_section.dart
+│ │ ├── error_widget.dart
+│ │ ├── loading_indicator_widget.dart
+│ │ ├── my_app_bar.dart
+│ │ └── no_items_found.dart
+│ └── utils/
+│ └── app_colors.dart
+├── features/
+│ ├── home/
+│ │ ├── data/
+│ │ │ ├── data_source/
+│ │ │ └── models/
+│ │ └── presentation/
+│ │ ├── cubit/
+│ │ ├── screens/
+│ │ └── widgets/
+│ └── source/
+│ ├── data/
+│ │ ├── data_source/
+│ │ └── models/
+│ └── presentation/
+│ ├── cubit/
+│ ├── screens/
+│ └── widgets/
+├── main.dart
+└── main_view.dart
+```
+
+* **Cubit** for state management  
+* **Dio** for HTTP requests  
+* **ConvexAppBar** for bottom navigation  
+---
+
+## 📦 Installation
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/KarimTamer74/nti---news_app
+cd nti---news_app
+```
+
+### 2. Install dependencies
 
 ```bash
 flutter pub get
 ```
 
-3. Run the app (choose a device/emulator):
+### 3. Run the app
 
 ```bash
 flutter run
 ```
-
-4. To build releases:
-
-```bash
-# Android
-flutter build apk --release
-
-# iOS
-flutter build ios --release
-```
-
-## API Source
-
-The app fetches news from a remote API. The primary network entrypoint is:
-
-`lib/features/home/data/api_service/api_services.dart`
-
-This file contains the API client, endpoints, and response parsing logic. If you use NewsAPI.org, add your API key securely (do not commit keys to source). Consider using flavors or environment variables for different API backends.
-
-## Notes & Tips
-
-- Localization: The project includes English and Arabic translations. To add/change strings, edit the ARB files under `lib/l10n/` (or your chosen localization approach) and re-run generation if necessary.
-- Theme: Light and dark themes are implemented in `core` utilities. Toggle from the settings screen.
-- Caching: Consider integrating `cached_network_image` for images and a lightweight local DB (e.g., `hive`) for bookmarks if you want offline persistence.
-- Secrets: Never commit API keys. Use `--dart-define` or platform environment approaches for CI.
-
-## Contributing
-
-1. Fork the repo
-2. Create a feature branch
-3. Open a pull request with descriptive changes
-
-## License
-
-This project is provided as-is. Add your preferred license here.
-
 ---
 
-If you want, I can also:
+Future Enhancements
 
-- Add screenshot placeholders into `assets/app_shots/`.
-- Wire up a basic `.env` or `--dart-define` example for API keys.
-- Run `flutter analyze` and fix any lint issues from the new README changes.
+Add Favorites/Bookmarks for saved articles.
 
-Completion: updated `README.md` in repository root with News App content.
+Implement Profile & Settings screen.
+
+Add Dark/Light Theming switch.
+
+Integrate Localization (AR/EN) support.
+
+Add Offline caching for reading without internet.
+
+Notes
+
+API configuration and network layer are located in:
+lib/features/*/data/api_service/api_services.dart
+
+Uses NewsAPI.org
+ for real-time news data.
+
+All screenshots are from the Dark Mode version, stored in app_shots/.
+
+Bottom navigation is implemented using Convex Bottom Bar with two main tabs:
+Home and Sources.
+
+Happy coding! 📰
+Contributions and PRs are always welcome 🤝
