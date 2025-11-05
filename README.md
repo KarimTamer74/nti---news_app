@@ -129,8 +129,8 @@ The app follows the **Clean MVVM Architecture** pattern for scalability and sepa
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/KarimTamer74/nti---news_app
-cd nti---news_app
+git clone https://github.com/KarimTamer74/nti_newApp.git
+cd nti_newApp
 ```
 
 ### 2. Install dependencies
