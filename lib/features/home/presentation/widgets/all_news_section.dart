@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/core/shared_widgets/error_widget.dart';
 import 'package:news_app/core/shared_widgets/loading_indicator_widget.dart';
-import 'package:news_app/core/utils/app_colors.dart';
+import 'package:news_app/core/shared_widgets/no_items_found.dart';
 import 'package:news_app/features/home/data/models/article_model.dart';
 import 'package:news_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:news_app/features/home/presentation/cubit/home_states.dart';
@@ -28,12 +28,7 @@ class AllNewsSection extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.all(12.0),
             child: allNewsArticles.isEmpty
-                ? Center(
-                    child: Text(
-                      "No News Found",
-                      style: TextStyle(color: AppColors.white, fontSize: 28),
-                    ),
-                  )
+                ? NoItemsFound(message: 'No news found')
                 : ListView.builder(
                     itemCount: allNewsArticles.length,
                     itemBuilder: (context, index) {
