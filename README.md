@@ -4,21 +4,21 @@
 
 ---
 
-## Table of Contents
+## 📚 Table of Contents
 
-* [App Overview](#app-overview)
-* [Main Features](#main-features)
-* [App Preview](#app-preview)
-* [📸 Extra Screens](#-extra-screens)
-* [🛠 Tech Stack](#-tech-stack)
-* [Project Structure (key files)](#project-structure-key-files)
-* [📦 Installation](#-installation)
-* [Future Enhancements](#future-enhancements)
-* [Notes](#notes)
+- [App Overview](#-app-overview)
+- [Main Features](#-main-features)
+- [App Preview](#-app-preview)
+- [📸 Extra Screens](#-extra-screens)
+- [🛠 Tech Stack](#-tech-stack)
+- [Project Structure](#-project-structure)
+- [📦 Installation](#-installation)
+- [🚀 Future Enhancements](#-future-enhancements)
+- [📝 Notes](#-notes)
 
 ---
 
-## App Overview
+## 📱 App Overview
 
 > **News App** is a modern Flutter application that delivers the latest headlines and top stories from around the world.  
 > The app focuses on simplicity, speed, and clean UI — featuring categorized news, trending topics, and news sources, all powered by the **NewsAPI**.
@@ -27,7 +27,7 @@ The app is built with **MVVM architecture**, **BLoC (Cubit)** for state manageme
 
 ---
 
-## Main Features
+## ⭐ Main Features
 
 ### 🏠 Home Screen
 
@@ -45,7 +45,7 @@ The app is built with **MVVM architecture**, **BLoC (Cubit)** for state manageme
 
 ---
 
-## App Preview
+## 📱 App Preview
 
 |               Home                |             Categories              |             Home Search              |
 | :-----------------------------------: | :-------------------------------------: | :----------------------------------: |
@@ -55,16 +55,19 @@ The app is built with **MVVM architecture**, **BLoC (Cubit)** for state manageme
 | :-------------------------------------------: | :---------------------------------: | :-----------------------------------: |
 | ![Sources](app_shots/sources.png) | ![ Sources Categories](app_shots/sources_cat.png) | ![Sources Search](app_shots/sources_search.png) |
 
----
 
+
+---
 ## 📸 Extra Screens
 
-|             No Source             |             No News             |             Category News Dark             |
-| :-----------------------------------------: | :---------------------------------: | 
-| ![No Source](app_shots/no_sources.png) | ![No News](app_shots/no_news.png) | 
+|             No Source             |             No News            
+| :-------------------------------: | :-----------------------------:
+| ![No Source](app_shots/no_sources.png) | ![No News](app_shots/no_news.png) | ![Category News Dark](app_shots/category_news_dark.png) |
+
+
+
 
 ---
-
 ## 🛠 Tech Stack
 
 * ![Flutter](https://img.shields.io/badge/Flutter-3.13+-blue?logo=flutter)
@@ -76,9 +79,10 @@ The app is built with **MVVM architecture**, **BLoC (Cubit)** for state manageme
 * **API Source:** [NewsAPI.org](https://newsapi.org/)  
 * **Storage:** Shared Preferences (for caching data if needed)  
 
----
 
-## Project Structure (key files)
+
+---
+## 📂 Project Structure
 
 The app follows the **Clean MVVM Architecture** pattern for scalability and separation of concerns.
 
@@ -119,6 +123,7 @@ The app follows the **Clean MVVM Architecture** pattern for scalability and sepa
 * **ConvexAppBar** for bottom navigation  
 ---
 
+
 ## 📦 Installation
 
 ### 1. Clone the repository
@@ -139,32 +144,32 @@ flutter pub get
 ```bash
 flutter run
 ```
+
+
 ---
 
-Future Enhancements
+## 🚀 Future Enhancements
 
-Add Favorites/Bookmarks for saved articles.
+⭐ Add Favorites/Bookmarks for saved articles
 
-Implement Profile & Settings screen.
+👤 Implement Profile & Settings screen
 
-Add Dark/Light Theming switch.
+🌓 Add Dark/Light Theming switch
 
-Integrate Localization (AR/EN) support.
+🌍 Integrate Localization (AR/EN) support
 
-Add Offline caching for reading without internet.
+📶 Add Offline Caching for reading without internet
 
-Notes
+## 📝 Notes
 
-API configuration and network layer are located in:
-lib/features/*/data/api_service/api_services.dart
+🌐 Uses NewsAPI.org
+ for real-time news data
 
-Uses NewsAPI.org
- for real-time news data.
+🖼️ All screenshots are from the Dark Mode version, stored in app_shots/
 
-All screenshots are from the Dark Mode version, stored in app_shots/.
+📱 Bottom navigation implemented using Convex Bottom Bar with two main tabs:
+Home and Sources
 
-Bottom navigation is implemented using Convex Bottom Bar with two main tabs:
-Home and Sources.
-
-Happy coding! 📰
+💡 Happy coding! 📰
 Contributions and PRs are always welcome 🤝
+---
