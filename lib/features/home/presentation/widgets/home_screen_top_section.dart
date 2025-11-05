@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/core/shared_widgets/category_section.dart';
 import 'package:news_app/core/utils/app_colors.dart';
 import 'package:news_app/features/home/presentation/cubit/home_cubit.dart';
 
@@ -11,14 +12,6 @@ class HomeScreenTopSection extends StatefulWidget {
 }
 
 class _HomeScreenTopSectionState extends State<HomeScreenTopSection> {
-  List<String> categories = [
-    'All',
-    'Technology',
-    'Politics',
-    'Sports',
-    'Entertainment',
-    'World',
-  ];
   final TextEditingController _controller = TextEditingController();
   int currentIndex = 0;
   @override
@@ -65,39 +58,15 @@ class _HomeScreenTopSectionState extends State<HomeScreenTopSection> {
               ),
             ),
           ),
+          SizedBox(height: 16),
           //* Categories List View
-          Expanded(
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: categories.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(right: 10.0),
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(15),
-                    splashColor: AppColors.black,
-                    onTap: () {
-                      setState(() {
-                        currentIndex = index;
-                      });
-                    },
-                    child: Chip(
-                      side: BorderSide.none,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadiusGeometry.circular(15),
-                      ),
-                      backgroundColor: currentIndex == index
-                          ? AppColors.blue
-                          : AppColors.fillColor,
-                      label: Text(
-                        categories[index],
-                        style: TextStyle(color: AppColors.white),
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
+          CategorySection(
+            currentIndex: currentIndex,
+            onCategorySelected: (int value) {
+              setState(() {
+                currentIndex = value;
+              });
+            },
           ),
         ],
       ),
