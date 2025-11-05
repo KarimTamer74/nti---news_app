@@ -1,26 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/core/utils/app_colors.dart';
 
-class SearchBarWidget extends StatelessWidget {
-  final ValueChanged<String> onChanged;
-  const SearchBarWidget({super.key, required this.onChanged});
+class SearchBarField extends StatelessWidget {
+  final TextEditingController controller;
+  final ValueChanged<String>? onChanged;
+  final VoidCallback? onSearch;
+  final VoidCallback? onClear;
+final String? hintText;
+  const SearchBarField({
+    super.key,
+    required this.controller,
+    this.onChanged,
+    this.onSearch,
+    this.onClear, this.hintText,
+  });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
+      style: const TextStyle(color: AppColors.white),
       onChanged: onChanged,
       decoration: InputDecoration(
-        prefixIcon: const Icon(Icons.search, color: AppColors.white),
-        hintText: 'Search sources...',
+        prefixIcon: IconButton(
+          onPressed: onSearch,
+          icon: const Icon(Icons.search, color: AppColors.white),
+        ),
+        suffixIcon: IconButton(
+          onPressed: onClear,
+          icon: const Icon(Icons.close, color: AppColors.white),
+        ),
+        hintText:hintText,
         hintStyle: const TextStyle(color: AppColors.white),
         filled: true,
         fillColor: AppColors.fillColor,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide.none,
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
           borderSide: BorderSide.none,
         ),
       ),
-      style: const TextStyle(color: AppColors.white),
     );
   }
 }
